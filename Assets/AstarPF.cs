@@ -48,7 +48,7 @@ public class AstarPF : MonoBehaviour {
             {
                 if (!Neighbor.wall || ClosedLst.Contains(Neighbor))
                     continue;
-                int movecost = CurNode.Gval + GetManhattenDis(CurNode, Neighbor);
+                int movecost = CurNode.Gval + GetNeighborDis(CurNode, Neighbor);/*GetManhattenDis(CurNode, Neighbor)*/;
                 if(movecost<Neighbor.Gval||!OpenLst.Contains(Neighbor))
                 {
                     Neighbor.Gval = movecost;
@@ -65,7 +65,14 @@ public class AstarPF : MonoBehaviour {
     {
         int x = (int)Mathf.Abs(_nodeA.NodeGridPos.x - _nodeB.NodeGridPos.x);
         int y = (int)Mathf.Abs(_nodeA.NodeGridPos.y - _nodeB.NodeGridPos.y);
-        return x + y;
+        return 10*(x + y);
+    }
+
+    int GetNeighborDis(AstarNode _nodeA,AstarNode _nodeB)
+    {
+        float x = Vector2.Distance(_nodeA.NodeGridPos, _nodeB.NodeGridPos);
+        x *= 10;
+        return (int)x; 
     }
 
     void GetFinalPath(AstarNode _startnode, AstarNode _endnode)

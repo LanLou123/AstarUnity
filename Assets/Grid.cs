@@ -67,9 +67,33 @@ class Grid : MonoBehaviour
         if (xCheck >= 0 && xCheck < gridSizeX
             && yCheck >= 0 && yCheck < gridSizeY)
             Neighbor.Add(grid[xCheck, yCheck]);
+        //topright
+        xCheck = (int)_AstarNode.NodeGridPos.x + 1;
+        yCheck = (int)_AstarNode.NodeGridPos.y - 1;
+        if (xCheck >= 0 && xCheck < gridSizeX
+            && yCheck >= 0 && yCheck < gridSizeY)
+            Neighbor.Add(grid[xCheck, yCheck]);
+        //bottomright
+        xCheck = (int)_AstarNode.NodeGridPos.x + 1;
+        yCheck = (int)_AstarNode.NodeGridPos.y + 1;
+        if (xCheck >= 0 && xCheck < gridSizeX
+            && yCheck >= 0 && yCheck < gridSizeY)
+            Neighbor.Add(grid[xCheck, yCheck]);
         //left
         xCheck = (int)_AstarNode.NodeGridPos.x - 1;
         yCheck = (int)_AstarNode.NodeGridPos.y;
+        if (xCheck >= 0 && xCheck < gridSizeX
+            && yCheck >= 0 && yCheck < gridSizeY)
+            Neighbor.Add(grid[xCheck, yCheck]);
+        //topleft
+        xCheck = (int)_AstarNode.NodeGridPos.x - 1;
+        yCheck = (int)_AstarNode.NodeGridPos.y - 1;
+        if (xCheck >= 0 && xCheck < gridSizeX
+            && yCheck >= 0 && yCheck < gridSizeY)
+            Neighbor.Add(grid[xCheck, yCheck]);
+        //bottomleft
+        xCheck = (int)_AstarNode.NodeGridPos.x - 1;
+        yCheck = (int)_AstarNode.NodeGridPos.y + 1;
         if (xCheck >= 0 && xCheck < gridSizeX
             && yCheck >= 0 && yCheck < gridSizeY)
             Neighbor.Add(grid[xCheck, yCheck]);

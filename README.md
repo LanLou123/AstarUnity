@@ -8,7 +8,7 @@
 - **Eight directions**
 ![](https://github.com/LanLou123/AstarUnity/raw/master/pathfinding1.gif)
 
-- **Larger size maze(101X101)** (the pathfinding is optimized with heap sort this time, so this is a demenstration of how efficient it could be)
+- **Larger size maze(101X101)** (the pathfinding is optimized with heap sort this time, so this is a demonstration of how efficient it could be)
 ![](https://github.com/LanLou123/AstarUnity/raw/master/pathfinding2.gif)
 
 

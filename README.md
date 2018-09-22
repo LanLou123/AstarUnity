@@ -13,7 +13,7 @@
 
 
 ## Features:
-- Prime method random maze generation
+- Prim's method random maze generation
 - A* pathfinding
 - Heap optimization
   - instead of storing the Astarnode instances inside a list as openlist, I created a Heap class specifically for Astar nodes, therefore reducing the time complexity of both adding and deleting elements based on the value of F cost for each node, which to be more specific has been reduced from ```O(n)``` to ```O(log2n)```.

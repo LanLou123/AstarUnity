@@ -8,7 +8,7 @@ namespace Assets
 {
     class common
     {
-        public static int[] mazesize = new int[2] {21,21 } ;
+        public static int[] mazesize = new int[2] {91,91 } ;
         public static PRIMEmaze m1 = new PRIMEmaze();
     }
 }

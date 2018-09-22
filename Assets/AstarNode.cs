@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Assets
 {
-    class AstarNode
+    class AstarNode : IHeapItem<AstarNode>
     {
         public AstarNode(bool iswall, int x, int y, Vector3 position)
         {
@@ -22,6 +22,27 @@ namespace Assets
         public Vector2 NodeGridPos;
         public AstarNode parent;
         public int Gval, Hval;
+        int heapIdx;
         public int Fval { get { return Gval + Hval; } }
+        public int HeapIdx
+        {
+            get
+            {
+                return heapIdx;
+            }
+            set
+            {
+                heapIdx = value;
+            }
+        }
+        public int CompareTo(AstarNode _tocomp)
+        {
+            int compare = Fval.CompareTo(_tocomp.Fval);
+            if(compare==0)
+            {
+                compare = Hval.CompareTo(_tocomp.Hval);
+            }
+            return -compare;
+        }
     }
 }

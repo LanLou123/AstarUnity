@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Assets;
+using System.Diagnostics;
 
 public class AstarPF : MonoBehaviour {
 
@@ -19,30 +20,36 @@ public class AstarPF : MonoBehaviour {
     }
     void AstarFindPath(Vector3 _startPos,Vector3 _endPos)
     {
+        Stopwatch sw = new Stopwatch();
+        sw.Start();
         AstarNode Startnode = grid.NodeFromWorldPosition(_startPos);
         AstarNode Endnode = grid.NodeFromWorldPosition(_endPos);
 
-        List<AstarNode> OpenLst = new List<AstarNode>();
+        //List<AstarNode> OpenLst = new List<AstarNode>();
+        Assets.Heap < AstarNode> OpenLst = new Assets.Heap<AstarNode>(grid.MaxSize);
         HashSet<AstarNode> ClosedLst = new HashSet<AstarNode>();
 
-        OpenLst.Add(Startnode);
+        OpenLst.add(Startnode);
         while(OpenLst.Count>0)
         {
-            AstarNode CurNode = OpenLst[0];
-            for(int i = 1;i<OpenLst.Count;++i)
-            {
-                if(OpenLst[i].Fval<=CurNode.Fval&&
-                    OpenLst[i].Hval<CurNode.Hval)
-                {
-                    CurNode = OpenLst[i];
-                }
-            }
-            OpenLst.Remove(CurNode);
+            //AstarNode CurNode = OpenLst[0];
+            //for(int i = 1;i<OpenLst.Count;++i)
+            //{
+            //    if(OpenLst[i].Fval<=CurNode.Fval&&
+            //        OpenLst[i].Hval<CurNode.Hval)
+            //    {
+            //        CurNode = OpenLst[i];
+            //    }
+            //}
+            //OpenLst.Remove(CurNode);
+            AstarNode CurNode = OpenLst.RemoveFirst();
             ClosedLst.Add(CurNode);
             if(CurNode == Endnode)
             {
+                sw.Stop();
+                print("path found in " + sw.ElapsedMilliseconds + "ms");
                 GetFinalPath(Startnode, Endnode);
-                break;
+                return;
             }
             foreach(AstarNode Neighbor in grid.GetNeighboringNodes(CurNode))
             {
@@ -55,7 +62,9 @@ public class AstarPF : MonoBehaviour {
                     Neighbor.Hval = GetManhattenDis(Neighbor, Endnode);
                     Neighbor.parent = CurNode;
                     if (!OpenLst.Contains(Neighbor))
-                        OpenLst.Add(Neighbor);
+                        OpenLst.add(Neighbor);
+                    else
+                        OpenLst.UpdateItem(Neighbor);
                 }
             }
         }

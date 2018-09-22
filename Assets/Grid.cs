@@ -9,6 +9,7 @@ using Assets;
 [Serializable]
 class Grid : MonoBehaviour
 {
+    public bool GizemosOnlyPath;
     public Transform StartPos;
     public Vector2 gridSizeWorld;
     public LayerMask wallmask;
@@ -41,6 +42,15 @@ class Grid : MonoBehaviour
                     wall = false;
                 grid[x, y] = new AstarNode(wall, x, y, worldPT);
             }
+        }
+    }
+
+
+    public int MaxSize
+    {
+        get
+        {
+            return gridSizeX * gridSizeY;
         }
     }
 
@@ -116,16 +126,30 @@ class Grid : MonoBehaviour
         Gizmos.DrawWireCube(transform.position, new Vector3(gridSizeWorld.x, 1, gridSizeWorld.y));
         if(grid!=null)
         {
-            foreach(AstarNode node in grid)
+            if (GizemosOnlyPath)
             {
-                if (node.wall) Gizmos.color = Color.white;
-                else Gizmos.color = Color.blue;
-                if(Fpath!=null)
+                if (Fpath != null)
                 {
-                    if (Fpath.Contains(node))
+                    foreach (AstarNode n in Fpath)
+                    {
                         Gizmos.color = Color.red;
+                        Gizmos.DrawCube(n.position, Vector3.one * (nodeDiameter - nodedis));
+                    }
                 }
-                Gizmos.DrawCube(node.position, Vector3.one * (nodeDiameter - nodedis));
+            }
+            else
+            {
+                foreach (AstarNode node in grid)
+                {
+                    if (node.wall) Gizmos.color = Color.white;
+                    else Gizmos.color = Color.blue;
+                    if (Fpath != null)
+                    {
+                        if (Fpath.Contains(node))
+                            Gizmos.color = Color.red;
+                    }
+                    Gizmos.DrawCube(node.position, Vector3.one * (nodeDiameter - nodedis));
+                }
             }
         }
     }

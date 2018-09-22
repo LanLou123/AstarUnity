@@ -13,5 +13,5 @@
 - Prime method random maze generation
 - A* pathfinding
 - Heap optimization
-  - instead of storing the Astarnode instances inside a list as openlist, I created a Heap class specifically for Astar nodes, therefore reduce the time complexity of both adding and deleting elements based on the value of F cost for each node, which has been reduced from ```O(n)``` to ```O(log2n)```.
-  - for actual perfomance, when doing pathfinding for a 120X120 grid the total time for each finding execution changed from 15ms to 1ms, so this is a really huge improvement. 
+  - instead of storing the Astarnode instances inside a list as openlist, I created a Heap class specifically for Astar nodes, therefore reducing the time complexity of both adding and deleting elements based on the value of F cost for each node, which to be more specific has been reduced from ```O(n)``` to ```O(log2n)```.
+  - for actual perfomance, when doing pathfinding for a 120X120 grid, the total time cost for each finding execution changed from 15ms to 1ms, so this is a really huge improvement. 

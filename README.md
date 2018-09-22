@@ -5,5 +5,5 @@
 ![](https://github.com/LanLou123/AstarUnity/raw/master/pathfinding.gif)
 
 ## Features:
-- Prime maze generation
+- Prime method random maze generation
 - A* pathfinding
